@@ -58,6 +58,11 @@ exit - (e.g. exit)  This command will stop the applciation.
 ## Roadmap
 This yack has been shaved enough, it will now be put on the shelf for others to look at.
 
+That being said here are some things I would do if I had more time to enrich the application:
+1. I would abstract the console output so that I could write more unit tests for the output sent to it.
+2. I would abstract the HttpClient dependency so that I could mock its results and test different scenarios for bad connections or failed requests.
+3. I would build another implementation of the IPhotoService which would read the json from a local file on disk, or possibly have it get the data from the web and write it to disk and then have it get its information from the disk copy.  This could provide an "offline" mode to the app if desired.
+4.  Add a command to download a picture by id.  It would then use the photo url value to get the image, serialize it to disk and present it for the user to view.
 ## Contributing
 
 Pull requests are welcome.
