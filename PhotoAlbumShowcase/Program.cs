@@ -21,15 +21,6 @@ SetupServices();
 
 await RunMainLoop();
 
-void SetupServices()
-{
-    using IServiceScope serviceScope = _host.Services.CreateScope();
-    IServiceProvider provider = serviceScope.ServiceProvider;
-    _photoService = provider.GetRequiredService<IPhotoService>();
-    _commandParser = provider.GetRequiredService<ICommandParser>();
-    _commandRunner = provider.GetRequiredService<ICommandRunner>();
-}
-
 void ConfigureHost(HostApplicationBuilder host)
 {
     builder.Logging.AddConsole();
@@ -52,6 +43,15 @@ void ConfigureHost(HostApplicationBuilder host)
     _host = builder.Build();
 }
 
+void SetupServices()
+{
+    using IServiceScope serviceScope = _host.Services.CreateScope();
+    IServiceProvider provider = serviceScope.ServiceProvider;
+    _photoService = provider.GetRequiredService<IPhotoService>();
+    _commandParser = provider.GetRequiredService<ICommandParser>();
+    _commandRunner = provider.GetRequiredService<ICommandRunner>();
+}
+
 async Task RunMainLoop()
 {
     
@@ -64,7 +64,7 @@ async Task RunMainLoop()
         
         var Commands = commandText.Split(' ');
 
-        var command = _commandParser.ParseCommand(Commands[0]);
+        CommandType command = _commandParser.ParseCommand(Commands[0]);
         int id = 0;
         if(Commands.Length > 1)
         {
