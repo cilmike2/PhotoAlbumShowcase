@@ -8,6 +8,7 @@ namespace PhotoAlbumShowcase.Photos
 
         public WebPhotoService(IHttpClientFactory httpClientFactory)
         {
+            // this code gets the named http client 'Photos' from the startup configuration
             _httpClient = httpClientFactory.CreateClient("Photos");
         }
 

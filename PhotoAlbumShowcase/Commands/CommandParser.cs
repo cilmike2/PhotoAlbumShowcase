@@ -4,9 +4,7 @@ public class CommandParser : ICommandParser
 {
     public CommandType ParseCommand(string commandText)
     {
-        var Command = commandText.Split(' ').First();
-
-        return Command switch
+        return commandText switch
         {
             "all" => CommandType.GetAll,
             "album" => CommandType.GetByAlbumId,

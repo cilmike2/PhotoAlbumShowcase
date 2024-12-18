@@ -15,28 +15,26 @@ namespace PhotoAlbumShowcase.Commands
         {
             ICollection<Photo> photos = new List<Photo>();
 
-            if (command.Equals(CommandType.GetAll))
+            switch (command)
             {
-                photos = await _photoService.GetPhotos();
-                DisplayPhotos(photos);
-            }
-            else if (command.Equals(CommandType.GetByAlbumId))
-            {
-                photos = await _photoService.GetPhotosByAlbum(id);
-                DisplayPhotos(photos);
-            }
-            else if (command.Equals(CommandType.GetById))
-            {
-                photos = await _photoService.GetPhoto(id);
-                DisplayPhotos(photos);
-            }
-            else if (command.Equals(CommandType.Help))
-            {
-                DisplayHelpText();
-            }
-            else if (command.Equals(CommandType.Unknown))
-            {
-                Console.WriteLine($"{commandText} is not a recognized command, please try again or type help for more info.");
+                case CommandType.GetAll:
+                    photos = await _photoService.GetPhotos();
+                    DisplayPhotos(photos);
+                    break;
+                case CommandType.GetByAlbumId:
+                    photos = await _photoService.GetPhotosByAlbum(id);
+                    DisplayPhotos(photos);
+                    break;
+                case CommandType.GetById:
+                    photos = await _photoService.GetPhoto(id);
+                    DisplayPhotos(photos);
+                    break;
+                case CommandType.Help:
+                    DisplayHelpText();
+                    break;
+                case CommandType.Unknown:
+                    Console.WriteLine($"{commandText} is not a recognized command, please try again or type help for more info.");
+                    break;
             }
 
             return photos;

@@ -55,38 +55,51 @@ void SetupServices()
 async Task RunMainLoop()
 {
     
-    Console.WriteLine("Welcome to the photo album showcase.  Enter a command now or type exit to close the app any time.");
+    Console.WriteLine("Welcome to the photo album showcase.  Enter a command now or type exit to close the app any time. You may also type 'help' any time for more information.");
     
 
     while (ContinueRunning)
     {
         var commandText = Console.ReadLine();
-        
+
         var Commands = commandText.Split(' ');
 
         CommandType command = _commandParser.ParseCommand(Commands[0]);
-        int id = 0;
-        if(Commands.Length > 1)
-        {
-            id = int.Parse(Commands[1]);
-        }
         
-        if (command.Equals(CommandType.Exit))
+        int photoIdParameter = ParsePhotoIdParameter(Commands);
+
+        if (command != CommandType.Exit)
         {
-            ContinueRunning = false;
-        } 
+            await ExectueCommand(_commandRunner, commandText, command, photoIdParameter);
+        }
         else
         {
-            try
-            {
-                var photos = await _commandRunner.Execute(command, id, commandText);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"There was an error while executing your command, please try again.");
-            }
+            ContinueRunning = false;
         }
+        
     }
     await _host.StopAsync();
 }
 
+static int ParsePhotoIdParameter(string[] Commands)
+{
+    int photoIdParameter = 0;
+    if (Commands.Length > 1)
+    {
+        photoIdParameter = int.Parse(Commands[1]);
+    }
+
+    return photoIdParameter;
+}
+
+static async Task ExectueCommand(ICommandRunner _commandRunner, string? commandText, CommandType command, int photoIdParameter)
+{
+    try
+    {
+        var photos = await _commandRunner.Execute(command, photoIdParameter, commandText);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("There was an error while executing your command, please try again.");
+    }
+}
