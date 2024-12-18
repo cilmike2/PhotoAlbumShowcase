@@ -33,7 +33,7 @@ dotnet build PhotoAlbumShowcase.csproj
 ```
 
 After you have built the app navigate to the build ouput folder normally in the
-```bin\debug\net6.0``` folder
+```bin\debug\net8.0``` folder
 
 Finally to start the app run:
 ```
@@ -47,6 +47,8 @@ Below is a list of possible commands to run:
 all - This command takes no following parameters and will simply display all photos available.
 
 album - (e.g. album 3)  This command will display all the photos with an albumId of 3.
+
+download - (e.g. download 2)  This command will download the photo with an id of 2.)
 
 photo - (e.g. photo 2)  This command will display the photos with an id of 2.
 
@@ -62,7 +64,6 @@ That being said here are some things I would do if I had more time to enrich the
 1. I would abstract the console output so that I could write more unit tests for the output sent to it.
 2. I would abstract the HttpClient dependency so that I could mock its results and test different scenarios for bad connections or failed requests.
 3. I would build another implementation of the IPhotoService which would read the json from a local file on disk, or possibly have it get the data from the web and write it to disk and then have it get its information from the disk copy.  This could provide an "offline" mode to the app if desired.
-4.  Add a command to download a picture by id.  It would then use the photo url value to get the image, serialize it to disk and present it for the user to view.
 ## Contributing
 
 Pull requests are welcome.
