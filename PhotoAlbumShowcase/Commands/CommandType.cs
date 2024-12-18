@@ -2,6 +2,7 @@
 {
     public enum CommandType
     {
+        Download,
         GetAll,
         GetByAlbumId,
         GetById,

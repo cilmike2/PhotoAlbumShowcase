@@ -19,15 +19,23 @@ namespace PhotoAlbumShowcase.Commands
             {
                 case CommandType.GetAll:
                     photos = await _photoService.GetPhotos();
+                    Console.Clear();
                     DisplayPhotos(photos);
                     break;
                 case CommandType.GetByAlbumId:
                     photos = await _photoService.GetPhotosByAlbum(id);
+                    Console.Clear();
                     DisplayPhotos(photos);
                     break;
                 case CommandType.GetById:
                     photos = await _photoService.GetPhoto(id);
+                    Console.Clear();
                     DisplayPhotos(photos);
+                    break;
+                case CommandType.Download:
+                    var photoPath = await _photoService.DownloadPhoto(id);
+                    Console.Clear();
+                    Console.WriteLine($"Photo {id} has been downloaded to {photoPath}.");
                     break;
                 case CommandType.Help:
                     DisplayHelpText();
@@ -50,6 +58,8 @@ namespace PhotoAlbumShowcase.Commands
             Console.WriteLine("all - This command takes no following parameters and will simply display all photos available.");
             Console.WriteLine("");
             Console.WriteLine("album - (e.g. album 3)  This command will display all the photos with an albumId of 3.");
+            Console.WriteLine("");
+            Console.WriteLine("download - (e.g. download 34)  This command will download the image to the current users desktop and then display the path that it was saved to.");
             Console.WriteLine("");
             Console.WriteLine("photo - (e.g. photo 2)  This command will display the photos with an id of 2.");
             Console.WriteLine("");

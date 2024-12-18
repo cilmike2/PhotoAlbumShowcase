@@ -55,8 +55,9 @@ void SetupServices()
 async Task RunMainLoop()
 {
     
-    Console.WriteLine("Welcome to the photo album showcase.  Enter a command now or type exit to close the app any time. You may also type 'help' any time for more information.");
-    
+    Console.WriteLine("Welcome to the photo album showcase.  Enter a command now or type exit to close the app any time. ");
+    Console.WriteLine("Type help and hit enter for a list of commands to get started...");
+
 
     while (ContinueRunning)
     {

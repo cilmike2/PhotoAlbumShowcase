@@ -8,8 +8,9 @@ public class CommandParser : ICommandParser
         {
             "all" => CommandType.GetAll,
             "album" => CommandType.GetByAlbumId,
-            "photo" => CommandType.GetById,
+            "download" => CommandType.Download,
             "help" => CommandType.Help,
+            "photo" => CommandType.GetById,
             "exit" => CommandType.Exit,
             _ => CommandType.Unknown,
         };

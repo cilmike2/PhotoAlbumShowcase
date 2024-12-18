@@ -20,7 +20,7 @@ namespace PhotoAlbumShowcase.Photos
 
         public override string ToString()
         {
-            return $"[{Id}] {Title}";
+            return $"[{Id}] -  Album: {AlbumId}, Photo Title: {Title}";
         }
     }
 }

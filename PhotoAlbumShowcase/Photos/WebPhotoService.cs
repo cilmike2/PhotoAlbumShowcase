@@ -12,6 +12,21 @@ namespace PhotoAlbumShowcase.Photos
             _httpClient = httpClientFactory.CreateClient("Photos");
         }
 
+        public async Task<string> DownloadPhoto(int id)
+        {
+            var photo = await CallHttpEndpoint($"photos?id={id}");
+
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var photoPath = Path.Combine(desktopPath, $"Photo_{photo.First().Id}.jpg");
+
+            using (var client = new System.Net.WebClient())
+            {
+                client.DownloadFile(photo.First().Url, photoPath);
+            }
+
+            return photoPath;
+        }
+
         public async Task<ICollection<Photo>> GetPhoto(int id)
         {
             return await CallHttpEndpoint($"photos?id={id}");

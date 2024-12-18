@@ -7,5 +7,7 @@
         Task<ICollection<Photo>> GetPhotosByAlbum(int albumId);
 
         Task<ICollection<Photo>> GetPhoto(int id);
+
+        Task<string> DownloadPhoto(int id);
     }
 }
